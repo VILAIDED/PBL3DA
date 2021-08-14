@@ -44,6 +44,7 @@ namespace ServerGz.Controllers
             return Ok();
         }
         [HttpGet,Route("revenue/{month}/{year}")]
+        [Authorize(Roles = "admin")]
         public IEnumerable<BillDetail> GetRevenueMonth(int month,int year){
             Console.Write(year);
             return _context.BillDetail.Include(b => b.Bill).Where(b => b.Bill.orderDate.Month == month)
