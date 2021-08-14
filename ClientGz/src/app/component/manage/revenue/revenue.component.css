@@ -1,0 +1,14 @@
+.mat-table {
+  width: 100%;
+  height: calc( 100vh - 250px);
+  overflow: auto;
+}
+.grid-container {
+  margin: 30px;
+}
+.mat-form-field{
+  margin : 10px
+}
+.mat-elevation-z8{
+  height: 100%;
+}

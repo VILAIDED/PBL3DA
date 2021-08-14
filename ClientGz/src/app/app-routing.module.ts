@@ -4,6 +4,7 @@ import {ComputerManageComponent} from './component/manage/computer-manage/comput
 import {ComputerComponent} from './component/computer/computer.component';
 import {BillComponent} from './component/bill/bill.component';
 import {BillManageComponent} from './component/manage/bill-manage/bill-manage.component';
+import {RevenueComponent} from './component/manage/revenue/revenue.component';
 import {ChatComponent} from './component/chat/chat.component';
 import {TestComponent} from './component/test/test.component';
 
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'manage/computer',component:ComputerManageComponent},
   {path:'manage/bill',component:BillManageComponent},
+  {path :'manage/revenue',component:RevenueComponent},
   {path:'home',component:ComputerComponent},
   {path:'bill',component:BillComponent},
   {path:'chat',component:ChatComponent},

@@ -51,7 +51,12 @@ export class BillService {
   getBillManage(): Observable<Bill[]>{
     return this.http.get<Bill[]>(this.billUrl + '/manage',{headers : this.setHeader()});
   }
-
+  getRevenue(): Observable<BillDetail[]>{
+    return this.http.get<BillDetail[]>(this.billUrl + '/revenue',{headers : this.setHeader()})
+  }
+  getRevenueByDate(month : string , year : string): Observable<BillDetail[]>{
+    return this.http.get<BillDetail[]>(this.billUrl + `/revenue/${month}/${year}`,{headers : this.setHeader()})
+  }
   updateBill(id: number, bill: Bill): Observable<any> {
     const url = `${this.billUrl}/${id}`;
     return this.http.put(url, bill, {headers : this.setHeader()});

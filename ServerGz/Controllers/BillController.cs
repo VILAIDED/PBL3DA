@@ -43,7 +43,25 @@ namespace ServerGz.Controllers
             }
             return Ok();
         }
+        [HttpGet,Route("revenue/{month}/{year}")]
+        public IEnumerable<BillDetail> GetRevenueMonth(int month,int year){
+            Console.Write(year);
+            return _context.BillDetail.Include(b => b.Bill).Where(b => b.Bill.orderDate.Month == month)
+            .Where(b => b.Bill.orderDate.Year == year).Include(i => i.Computer)
+            .ToList().GroupBy(val => new  {val.computerId,val.Computer}).Select( b => new BillDetail{
+             computerId = b.Key.computerId, quanLiTy = b.Sum( i => i.quanLiTy),price = b.Sum(i => i.price),Computer = b.Key.Computer
+             }).ToList();
+            
+        }
 
+        [HttpGet,Route("revenue")]
+        [Authorize(Roles = "admin")]
+        public IEnumerable<BillDetail> GetRevenue(){
+            Console.WriteLine("hee");
+            return _context.BillDetail.Include(i => i.Computer).ToList().GroupBy(val => new  {val.computerId,val.Computer}).Select( b => new BillDetail{
+                computerId = b.Key.computerId, quanLiTy = b.Sum( i => i.quanLiTy),price = b.Sum(i => i.price),Computer = b.Key.Computer
+            }).ToList();
+        }        
         [HttpGet]
         [Authorize]
         public IEnumerable<Bill> GetBill()

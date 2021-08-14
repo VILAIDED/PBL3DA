@@ -7,6 +7,5 @@ export interface BillDetail
         computerId: number;
         price: number;
         quanLiTy:number;
-        
         computer: Computer;
 }

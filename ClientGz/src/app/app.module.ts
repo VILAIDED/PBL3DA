@@ -35,7 +35,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-    import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 //
 import {BillInfoComponent} from './component/bill-info/bill-info.component';
 import { CartComponent } from './component/cart/cart.component';
@@ -56,6 +56,7 @@ import { BillManageComponent } from './component/manage/bill-manage/bill-manage.
 import { BillManageDialogComponent } from './component/manage/bill-manage-dialog/bill-manage-dialog.component';
 import { ChatComponent } from './component/chat/chat.component';
 import { TestComponent } from './component/test/test.component';
+import { RevenueComponent } from './component/manage/revenue/revenue.component';
 //
 
 @NgModule({
@@ -80,6 +81,7 @@ import { TestComponent } from './component/test/test.component';
     BillManageDialogComponent,
     ChatComponent,
     TestComponent,
+    RevenueComponent,
 
   ],
   imports: [

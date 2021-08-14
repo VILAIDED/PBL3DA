@@ -1,0 +1,45 @@
+<div class="grid-container">
+  <h2>Revenue</h2>
+  <hr style="border-color: rgb(66, 59, 59);">
+  <mat-form-field>
+  <mat-label>Month</mat-label>
+    <input required type="number" min="1" max="12" matInput #monthInput (keyup)="setMonth(monthInput.value)"
+           placeholder="12">
+  </mat-form-field>
+  <mat-form-field>
+  <mat-label>Year</mat-label>
+    <input required type="number" min="2000" max="3000" matInput #yearInput (keyup)="setYear(yearInput.value)"
+           placeholder="2021">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="getBillDate()">Show</button>
+<hr>
+<div> <strong>Revenue in</strong> :  {{messageSearch}}</div>
+<hr>
+<div class="mat-elevation-z8" >
+  <table mat-table [dataSource]="billDetail">
+    <ng-container matColumnDef="Computer name">
+      <th mat-header-cell *matHeaderCellDef> Computer name </th>
+      <td mat-cell *matCellDef="let element"> {{element.computer.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.computer.price | number }}  </td>
+    </ng-container>
+    <ng-container matColumnDef="Quanlity">
+      <th mat-header-cell *matHeaderCellDef> Quanlity </th>
+      <td mat-cell *matCellDef="let element"> {{element.quanLiTy}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Total">
+      <th mat-header-cell *matHeaderCellDef> Total </th>
+      <td mat-cell *matCellDef="let element"> {{element.price | number}} đ</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedCol"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedCol;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+</div>

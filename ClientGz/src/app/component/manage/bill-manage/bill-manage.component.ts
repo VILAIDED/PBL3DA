@@ -55,17 +55,8 @@ export class BillManageComponent implements OnInit {
       }
     })
   }
-  showByStatus(){
-    // const bills : Bill[] = []
-    // var status = this.showBy;
-    // this.allBills.forEach(function (element) {
-    //   if(element.billStatus.status.includes(status)){
-    //     bills.push(element)
-    //   }
-    // });
-    // this.bills = bills
 
-  }
+
   searchSttDate(){
     const bills : Bill[] = []
     if(!this.showBy && !this.datePick){
