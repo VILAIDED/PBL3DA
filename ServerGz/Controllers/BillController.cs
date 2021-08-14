@@ -26,11 +26,15 @@ namespace ServerGz.Controllers
         [Authorize]
         public IActionResult AddBill(Bill bill)
         {
+            BillStatus billstt = new BillStatus();
+            billstt.Status = "Processing";
+            bill.orderDate =  DateTime.Now;
+            bill.billStatus = billstt;
             bill.accountName = User.Identity.Name;
-
+            
             _context.Bill.Add(bill);
             _context.SaveChanges();
-
+           // _context.BillStatuses.Add()
             foreach (var item in bill.billDetail)
             {
                 Computer computer = _context.Computer.Find(item.computerId);
@@ -45,7 +49,8 @@ namespace ServerGz.Controllers
         public IEnumerable<Bill> GetBill()
         {
             return _context.Bill
-                    .Where(i => i.accountName == User.Identity.Name)
+                    .Where(i => i.accountName== User.Identity.Name)
+                    .Include(i => i.billStatus)
                     .Include(i => i.billDetail)
                     .ThenInclude(c => c.Computer)
                     .ThenInclude(d => d.compon);
@@ -55,7 +60,7 @@ namespace ServerGz.Controllers
         [Authorize(Roles = "admin")]
         public IEnumerable<Bill> GetBillManage()
         {
-            return _context.Bill
+            return _context.Bill.Include(i => i.billStatus)
                 .Include(i => i.billDetail)
                 .ThenInclude(c => c.Computer)
                 .ThenInclude(d => d.compon);
@@ -71,6 +76,7 @@ namespace ServerGz.Controllers
             }
 
             _context.Entry(bill).State = EntityState.Modified;
+            _context.Entry(bill.billStatus).State = EntityState.Modified;
             try
             {
                 await _context.SaveChangesAsync();

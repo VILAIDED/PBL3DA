@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //
+import { DatePipe } from '@angular/common'
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,10 +30,12 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatSnackBarModule} from '@angular/material/snack-bar'; 
-import {MatRadioModule} from '@angular/material/radio'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+    import { MatNativeDateModule } from '@angular/material/core';
 //
 import {BillInfoComponent} from './component/bill-info/bill-info.component';
 import { CartComponent } from './component/cart/cart.component';
@@ -77,6 +80,7 @@ import { TestComponent } from './component/test/test.component';
     BillManageDialogComponent,
     ChatComponent,
     TestComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -110,9 +114,11 @@ import { TestComponent } from './component/test/test.component';
     MatRadioModule,
     MatExpansionModule,
     MatStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatNativeDateModule,
+      MatDatepickerModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

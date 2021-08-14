@@ -1,7 +1,6 @@
 <div class="grid-container">
     <h2>My Bill</h2>
     <hr style="border-color: rgb(66, 59, 59);">
-
     <div class="content" >
         <div fxLayout="row wrap" fxLayoutGap="20px grid" >
             <div fxFlex="30%" *ngFor="let bill of bills" (click)="openDialog(bill)">
@@ -9,18 +8,17 @@
                     <mat-card-header>
                         <mat-card-title>Receiver : {{bill.name}}</mat-card-title>
                     </mat-card-header>
-                    <mat-card-content>
-                        <hr>
-                        <div><b>Phone : </b>{{bill.phone}}</div>
-                        <br>
-                        <div><b>Address : </b>{{bill.address}}</div>
-                        <br>
-                        <div><b>Total : </b>{{bill.totalPrice | number}} đ</div>
-                        <hr>
-                        <div *ngIf="!bill.shipping && !bill.received"><b>Status : [ Processing ]</b></div>
-                        <div *ngIf="bill.shipping && !bill.received"><b>Status : [ Shipping ]</b></div>
-                        <div *ngIf="bill.received"><b>Status : [ Received ]</b></div>
-                    </mat-card-content>
+                    <hr>
+                    <mat-card-content class="bottomItem">
+                      <div><strong>Order Id</strong>   : #{{bill.id}}</div>
+                      <div><strong>Address</strong> : {{bill.address}}</div>
+                      <div><strong>Order Date</strong> : {{bill.orderDate | date : 'hh:mm dd/MM/yyyy '}}</div>
+                      <hr>
+                      <div class= "cardOrder">
+                      <div style="font-size: 19px;"><strong>[ {{bill.billStatus.status}} ]</strong></div>
+                      <div class="total"> <p>{{bill.totalPrice | number}} đ</p></div>
+                       </div>
+                  </mat-card-content>
                 </mat-card>
             </div>
     </div>

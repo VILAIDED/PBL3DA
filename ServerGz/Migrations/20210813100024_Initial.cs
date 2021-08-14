@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ServerGz.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,11 +12,26 @@ namespace ServerGz.Migrations
                 columns: table => new
                 {
                     name = table.Column<string>(type: "TEXT", nullable: false),
+                    role = table.Column<string>(type: "TEXT", nullable: true),
                     password = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Account", x => x.name);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BillStatuses",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    shippingDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    received = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillStatuses", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,10 +60,10 @@ namespace ServerGz.Migrations
                     name = table.Column<string>(type: "TEXT", nullable: true),
                     phone = table.Column<string>(type: "TEXT", nullable: true),
                     address = table.Column<string>(type: "TEXT", nullable: true),
+                    orderDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     totalPrice = table.Column<double>(type: "REAL", nullable: false),
-                    shipping = table.Column<bool>(type: "INTEGER", nullable: false),
-                    received = table.Column<bool>(type: "INTEGER", nullable: false),
-                    accountName = table.Column<string>(type: "TEXT", nullable: true)
+                    accountName = table.Column<string>(type: "TEXT", nullable: true),
+                    billStatusid = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,6 +73,12 @@ namespace ServerGz.Migrations
                         column: x => x.accountName,
                         principalTable: "Account",
                         principalColumn: "name",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Bill_BillStatuses_billStatusid",
+                        column: x => x.billStatusid,
+                        principalTable: "BillStatuses",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -121,6 +143,11 @@ namespace ServerGz.Migrations
                 column: "accountName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bill_billStatusid",
+                table: "Bill",
+                column: "billStatusid");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BillDetail_billId",
                 table: "BillDetail",
                 column: "billId");
@@ -153,6 +180,9 @@ namespace ServerGz.Migrations
 
             migrationBuilder.DropTable(
                 name: "Account");
+
+            migrationBuilder.DropTable(
+                name: "BillStatuses");
         }
     }
 }

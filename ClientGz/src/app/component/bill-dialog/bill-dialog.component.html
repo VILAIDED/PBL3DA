@@ -3,14 +3,19 @@
 </h1>
 <div mat-dialog-content fxLayoutGap="20px" style="width:1000px;height: 1000px;">
     <hr>
+    <div><b>OrderId : </b>#{{local_data.id}}</div>
     <div><b>Receiver : </b>{{local_data.name}}</div>
     <div><b>Phone : </b>{{local_data.phone}}</div>
     <div><b>Address : </b>{{local_data.address}}</div>
-    <div><b>Total : </b>{{local_data.totalPrice | number}} đ</div>
+    <div class="inlineItem">
+      <div><b>OrderDate : </b>{{local_data.orderDate | date : 'dd-MM-yyyy'}}</div>
+        <div class="total">Total : <strong>{{local_data.totalPrice  | number}}</strong> đ</div>
+      </div>
     <hr>
-    <div *ngIf="!local_data.shipping && !local_data.received"><b>Status : Processing</b></div>
-    <div *ngIf="local_data.shipping && !local_data.received"><b>Status : Shipping</b></div>
-    <div *ngIf="local_data.received"><b>Status : Received</b></div>
+    <div class="inlineItem">
+    <div ><b>Status : {{local_data.billStatus.status}}</b> </div>
+    <div style="color: #777777;" *ngIf='local_data.billStatus.status == "received"'> confirmed {{local_data.billStatus.received | date : 'dd-MM-yyyy, h:mm a'}}</div>
+    </div>
     <hr>
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
         <div fxFlex="33%" *ngFor="let item of local_data.billDetail">

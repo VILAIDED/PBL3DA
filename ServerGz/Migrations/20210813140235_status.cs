@@ -2,13 +2,13 @@
 
 namespace ServerGz.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class status : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "role",
-                table: "Account",
+                name: "Status",
+                table: "BillStatuses",
                 type: "TEXT",
                 nullable: true);
         }
@@ -16,8 +16,8 @@ namespace ServerGz.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "role",
-                table: "Account");
+                name: "Status",
+                table: "BillStatuses");
         }
     }
 }

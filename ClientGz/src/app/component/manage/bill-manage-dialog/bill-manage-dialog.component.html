@@ -3,22 +3,34 @@
 </h1>
 <div mat-dialog-content fxLayoutGap="20px" style="width:1000px;height: 1000px;">
     <hr>
-    <div><b>Receiver : </b>{{local_data.name}}</div> 
-    <div><b>Phone : </b>{{local_data.phone}}</div>
+    <div><b>orderId  :   </b>#{{local_data.id}}</div>
+    <div><b>Receiver :     </b>{{local_data.name}}</div>
+    <div><b>Phone :  </b>{{local_data.phone}}</div>
+    <div><strong>Order Date : </strong>{{local_data.orderDate | date : 'dd-MM-yyyy hh:mm'}}</div>
+    <div class="inlineItem">
     <div><b>Address : </b>{{local_data.address}}</div>
-    <div><b>Total : </b>{{local_data.totalPrice}} K</div>
+      <div class="total">Total : <strong>{{local_data.totalPrice  | number}}</strong> đ</div>
+
+    </div>
     <hr>
-    <label><b>Shipping :</b></label>
-    <mat-radio-group [(ngModel)]="local_data.shipping">
-	<mat-radio-button [value]=true >true</mat-radio-button>
-	<mat-radio-button [value]=false >false</mat-radio-button>
-    </mat-radio-group>
-    <br><br>
-    <label><b>Received :</b></label>
-    <mat-radio-group [(ngModel)]="local_data.received">
-	<mat-radio-button [value]=true >true</mat-radio-button>
-	<mat-radio-button [value]=false >false</mat-radio-button>
-    </mat-radio-group>
+    <div class="test">
+    <label><b>Shipping  :  </b></label>
+    <div class="status"  *ngIf="!shipStt">
+      <button mat-stroked-button class="btnCon" style="margin-left: 10px; font-size: 12px; " color="black" (click)="ShippingConFirm()">Confirm</button>
+    </div>
+    <div class="statusText"  *ngIf="shipStt">
+      confirmed  {{local_data.billStatus.shippingDate | date : 'MM/dd/yyyy, h:mm a'}}
+    </div>
+  </div>
+    <div class="test">
+     <div class="status"><label><b>Received :  </b></label></div>
+      <div class="status" *ngIf="!receivedStt">
+        <button mat-stroked-button style="margin-left: 10px;margin-top : 10px;font-size: 12px;" color="blue"  (click)="ReceiveConFirm()">Confirm</button>
+      </div>
+      <div class="statusText"  *ngIf="receivedStt">
+         confirmed   {{local_data.billStatus.received | date : 'MM/dd/yyyy, h:mm a'}}
+      </div>
+    </div>
     <hr>
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
 	<div fxFlex="33%" *ngFor="let item of local_data.billDetail">
@@ -29,10 +41,10 @@
 		</mat-card-header>
 		<img mat-card-image [src]="item.computer.compon.image" style="height: 200px;">
 		<mat-card-content>
-		    <div><b>Price : [{{item.computer.price}}] K</b></div>
+		    <div>Price : <strong>{{item.computer.price | number}} đ</strong></div>
 		    <br>
 		    <div>
-			<b>Num : [{{item.quanLiTy}}] </b>
+          Num : <strong>[{{item.quanLiTy}}] </strong>
 		    </div>
 		</mat-card-content>
 	    </mat-card>
@@ -41,7 +53,6 @@
 </div>
 <mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="save()">Save</button>
-
     <button mat-button matTooltip="Exit" mat-dialog-close>
 	<mat-icon>exit_to_app</mat-icon>
     </button>

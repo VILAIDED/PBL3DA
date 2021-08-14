@@ -10,6 +10,14 @@
     width: 200px;
 }
 
+.cardOrder {
+  display : flex;
+  justify-content: space-between;
+}
+.total{
+  font-size: 20px;
+
+}
 .textIcon{
     text-indent: 40px;
     font-weight:normal;

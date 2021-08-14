@@ -28,6 +28,7 @@ export class ComputerManageComponent implements OnInit {
   showAdmin: boolean = false;
   ngOnInit(): void {
     this.getComputers();
+    console.log(this.computers)
   }
 
   computers: Computer[] = [];

@@ -1,13 +1,13 @@
 <div class="grid-container">
     <h2>Manage Computer</h2>
+
     <mat-chip-list aria-label="Fish selection">
         <button mat-raised-button color="primary" (click)="getComputers()">Full List</button>
-        <b class="textIcon">Search :</b>
-        <input type="text" placeholder="enter name" #name (keyup.enter)="search(name.value)">
-        <b class="textIcon">Sort By Price :</b>
+        <b class="textIcon">Search :   </b>
+        <div style="margin-left: 1px;">  <input  type="text" placeholder="enter name" #name (keyup.enter)="search(name.value)"></div>
+        <div class="textIcon">Sort By Price :</div>
         <mat-chip color="primary" selected (click)="getSort('incre')">Increase</mat-chip>
         <mat-chip color="primary" selected (click)="getSort('desc')">Decrease</mat-chip>
-
     </mat-chip-list>
     <hr style="border-color: rgb(66, 59, 59);">
     <button mat-button matTooltip="Add" (click)="openDialog('Add',{})">

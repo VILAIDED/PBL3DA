@@ -1,25 +1,50 @@
 <div class="grid-container">
     <h2>Manage Bill</h2>
     <hr style="border-color: rgb(66, 59, 59);">
-
+     <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>OrderId</mat-label>
+    <input type="text" matInput #orderId (keyup.enter)="findById(orderId.value)"
+           placeholder="#123">
+  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Show bill by </mat-label>
+      <mat-select [(ngModel)]="showBy"  (selectionChange) = "searchSttDate()">
+        <mat-option selected value = "" >
+          All
+       </mat-option>
+        <mat-option value = "received" >
+           Received
+        </mat-option>
+        <mat-option value = "Processing" >
+          Processing
+       </mat-option>
+       <mat-option value = "shipping" >
+        Shipping
+     </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" (dateChange)="test($event)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker  disabled="false" #picker></mat-datepicker>
+    </mat-form-field>
+    <hr>
     <div class="content" >
         <div fxLayout="row wrap" fxLayoutGap="20px grid" >
             <div fxFlex="30%" *ngFor="let bill of bills" (click)="openDialog(bill)">
                 <mat-card class="mat-elevation-z4" style="cursor:pointer">
-                    <mat-card-header>
-                        <mat-card-title>Receiver : {{bill.name}}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <br>
-                        <div><b>Phone : </b>{{bill.phone}}</div>
-                        <br>
-                        <div><b>Address : </b>{{bill.address}}</div>
-                        <br>
-                        <div><b>Total : </b>{{bill.totalPrice | number}} đ</div>
+                        <div class = "cardTitle">#{{bill.id}}</div>
+                    <hr>
+                    <mat-card-content class="bottomItem">
+                        <div>{{bill.name}}</div>
+                        <div >{{bill.address}}</div>
+                        <div >{{bill.orderDate | date : 'hh:mm dd/MM/yyyy '}}</div>
                         <hr>
-                        <div *ngIf="!bill.shipping && !bill.received"><b>Status : [ Processing ]</b></div>
-                        <div *ngIf="bill.shipping && !bill.received"><b>Status : [ Shipping ]</b></div>
-                        <div *ngIf="bill.received"><b>Status : [ Received ]</b></div>
+                        <div class= "cardOrder">
+                        <div style="font-size: 19px;"><strong>[ {{bill.billStatus.status}} ]</strong></div>
+                        <div class="total"> <p>{{bill.totalPrice | number}} đ</p></div>
+                         </div>
                     </mat-card-content>
                 </mat-card>
             </div>

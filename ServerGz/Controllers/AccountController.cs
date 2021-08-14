@@ -41,9 +41,10 @@ namespace ServerGz.Controllers
 
         private bool checkAccount(Account account)
         {
-            Console.WriteLine("check account ...");
+           
             
             var user = _context.Account.Find(account.name);
+             Console.WriteLine(user.role);
             if (user != null)
             {
                 if (hashPass(account.password) == user.password)
@@ -60,6 +61,7 @@ namespace ServerGz.Controllers
             {
                 return BadRequest("Bad Request");
             }
+            Console.WriteLine("Hello world");
 
             if (checkAccount(account))
             {

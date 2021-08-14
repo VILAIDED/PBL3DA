@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System;
 namespace ServerGz.Models
 { 
     public class Bill
@@ -11,16 +11,14 @@ namespace ServerGz.Models
         public string name {get;set;}
         public string phone {get;set;}
         public string address {get;set;}
+        public DateTime orderDate {get;set;}
 
         public double totalPrice {get;set;}
-        
-        public bool shipping {get;set;}
-        public bool received {get;set;}
-
-        public string accountName {get;set;}
 
         [ForeignKey("accountName")]
+        public string accountName {get;set;}
         public Account account {get;set;}
+        public BillStatus billStatus {get;set;}
 
         public ICollection<BillDetail> billDetail {get;set;}
     }

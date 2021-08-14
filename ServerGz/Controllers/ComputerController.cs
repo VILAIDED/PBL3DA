@@ -73,6 +73,7 @@ namespace ServerGz.Controllers
             _context.Computer.Add(computer);
             _context.Compon.Add(computer.compon);
             await _context.SaveChangesAsync();
+            Console.WriteLine("hey");
             return CreatedAtAction("GetComputer", new { id = computer.id }, computer);
         }
 

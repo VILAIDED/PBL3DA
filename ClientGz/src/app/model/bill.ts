@@ -1,4 +1,5 @@
 import { BillDetail } from "./billDetail";
+import { BillStatus } from "./billStatus";
 
 export interface Bill
 {
@@ -8,8 +9,7 @@ export interface Bill
     phone: string;
     address: string;
     totalPrice:number;
-    shipping : boolean;
-    received : boolean;
-
+    orderDate : Date
+    billStatus : BillStatus;
     billDetail:BillDetail[];
 }

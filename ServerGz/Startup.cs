@@ -22,10 +22,8 @@ namespace ServerGz
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
             services.AddDbContext<GzDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("GzDbContext")));
-
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,6 +45,7 @@ namespace ServerGz
             });
 
             services.AddSignalR();
+         //   services.AddTransient<IEcommerceRepository, EcommerceRepository>();
         }
 
         public void Configure(IApplicationBuilder app)

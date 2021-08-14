@@ -25,6 +25,7 @@ export class BillComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
 
@@ -37,6 +38,7 @@ export class BillComponent implements OnInit {
       });
   }
   openDialog(obj) {
+    console.log(this.bills)
     this.dialog.open(BillDialogComponent, {
       data: obj
     });

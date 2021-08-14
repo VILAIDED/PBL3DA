@@ -15,6 +15,7 @@ namespace ServerGz.Data
 
         public DbSet<Bill> Bill {get;set;}
         public DbSet<BillDetail> BillDetail {get;set;}
+        public DbSet<BillStatus> BillStatuses {get;set;}
 
         public DbSet<Account> Account {get;set;}
     }
